@@ -1,0 +1,31 @@
+{
+  "name": "dove",
+  "version": "1.0.0",
+  "description": "2FA Tool",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexR1111/DOVE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexR1111/DOVE/issues"
+  },
+  "homepage": "https://github.com/AlexR1111/DOVE#readme",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.902.0",
+    "expess": "^0.0.1-security",
+    "got": "^14.4.9",
+    "jsonwebtoken": "^9.0.2",
+    "node.js": "^0.0.1-security"
+  }
+}

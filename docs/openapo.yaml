@@ -1,0 +1,94 @@
+openapi: 3.0.0
+info:
+  title: Dove Auth API
+  version: 1.0.0
+  description: API zur SMS-basierten Authentifizierung via Sinch
+  contact:
+    name: Alexander Reitz
+    email: alex-reitz1@gmx.de
+
+servers:
+  - url: http://localhost:3000
+    description: Lokale Entwicklung
+
+paths:
+  /request-code:
+    post:
+      summary: Einmalcode per SMS versenden
+      description: Generiert einen Einmalcode und versendet diesen über Sinch an die angegebene Telefonnummer.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phone
+              properties:
+                phone:
+                  type: string
+                  example: "+491234567890"
+      responses:
+        '200':
+          description: SMS erfolgreich versendet
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: sent
+                  expires_in:
+                    type: integer
+                    example: 300
+        '400':
+          description: Ungültige Telefonnummer
+        '500':
+          description: Fehler beim SMS-Versand
+  
+  /verify-code:
+    post
+      summary: Einmalcode verifizieren und Token erhalten
+      description: Prüft den vom Nutzer eingegebenen Code und gibt bei Erfolg ein JWT zurück.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - phone
+                - code
+              properties:
+                phone:
+                  type: string
+                  example:"+491234567890"
+                code:
+                  type:string
+                  example:"123456"
+      responses:
+      '200':
+        description: Verifizierung erfolgreich
+        contact:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: verified
+                token:
+                  type: string
+                  example: "eg342niunignfininOVPI97r7esjkner..."
+      '400':
+        description: Code ungültig oder abgelaufen
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  example: invalid_or_expired
+      
