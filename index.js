@@ -1,6 +1,6 @@
-import { requestCode } from './src/handlers/requestCode';
-import { verifyCode } from './src/handlers/'
-const express = require('express');
+import { requestCode } from './src/handlers/requestCode.js';
+import { verifyCode } from './src/handlers/verifyCode.js';
+import express from 'express';
 
 const app = express();
 app.use(express.json());

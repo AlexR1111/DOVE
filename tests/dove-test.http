@@ -1,0 +1,46 @@
+### Dove: Request Code
+
+POST http://localhost:3000/request-code
+Content-Type: application/json
+
+{
+  "phone": "+491234567890"
+}
+
+### 🕊️ Dove: Verify Code (gültig)
+
+POST http://localhost:3000/verify-code
+Content-Type: application/json
+
+{
+  "phone": "+491234567890",
+  "code": "834219"
+}
+
+### 🧨 Dove: Verify Code (falsch)
+
+POST http://localhost:3000/verify-code
+Content-Type: application/json
+
+{
+  "phone": "+491234567890",
+  "code": "999999"
+}
+
+### ⏳ Dove: Verify Code (abgelaufen)
+
+# Simuliere Ablauf durch manuelles Setzen eines alten TTL-Werts in DynamoDB
+POST http://localhost:3000/verify-code
+Content-Type: application/json
+
+{
+  "phone": "+491234567890",
+  "code": "834219"
+}
+
+### 🔐 Dove: JWT Test (geschützter Endpunkt)
+
+GET http://localhost:3000/protected
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+# Ersetze den Token durch den echten aus dem vorherigen /verify-code 
